@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 主管 Email（請改成你建立的主管帳號，全部用小寫，可用逗號加多個）
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email in ['請改成主管的email@example.com'];
+    }
+    function validRec(d) {
+      return d.keys().hasOnly(['name','unit','iv','kind','ts','sc','main','type'])
+        && d.name is string && d.name.size() > 0 && d.name.size() <= 50
+        && d.unit is string && d.unit.size() > 0 && d.unit.size() <= 50
+        && d.iv is string && d.iv.size() <= 50
+        && d.kind in ['新進人員','面試者','在職員工']
+        && d.ts is number
+        && d.sc.keys().hasOnly(['D','I','S','C'])
+        && d.sc.D is int && d.sc.I is int && d.sc.S is int && d.sc.C is int
+        && d.sc.D >= 5 && d.sc.D <= 35 && d.sc.I >= 5 && d.sc.I <= 35
+        && d.sc.S >= 5 && d.sc.S <= 35 && d.sc.C >= 5 && d.sc.C <= 35
+        && d.sc.D + d.sc.I + d.sc.S + d.sc.C == 80
+        && d.main in ['D','I','S','C'] && d.type in ['D','I','S','C','X'];
+    }
+    match /results/{id} {
+      allow create: if validRec(request.resource.data);  // 受測者只能新增
+      allow read, delete: if isAdmin();                  // 只有主管能讀取、刪除
+      allow update: if false;
+    }
+  }
+}
