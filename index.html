@@ -46,10 +46,10 @@ tr.r{cursor:pointer}tr.r:hover{background:var(--in)}ul{padding-left:20px;margin:
 <section id="s1"><div class="card">
  <h2 style="margin-top:0">🌈 測驗說明</h2>
  <div class="zoo"><div>🐯<small>D 老虎</small></div><div>🦚<small>I 孔雀</small></div><div>🐨<small>S 無尾熊</small></div><div>🦉<small>C 貓頭鷹</small></div><div>🦎<small>變色龍</small></div></div>
- <p>DISC 是了解個人<b>行為風格與溝通偏好</b>的工具，協助我們認識自己、理解他人，也讓主管找到適合的帶領方式。四種特質<b>沒有好壞</b>，多數人同時具備兩種以上。</p>
+ <p>DISC 是了解個人<b>行為風格與溝通偏好</b>的工具，協助我們認識自己、理解他人，也讓團隊與主管找到更適合的溝通及合作方式。四種特質<b>沒有好壞</b>，多數人同時具備兩種以上。</p>
  <p class="mu">結果反映的是當下作答的行為偏好，<b>不是能力、價值或職務適任性的定論</b>，也不會是唯一的錄用依據。</p>
  <p class="mu">📌 資料用途：您填寫的姓名、單位與測驗結果，僅供人資與直屬主管了解溝通風格、作為管理參考，不對外公開。</p>
- <ul><li>共 <span id="nq"></span> 個題組，約 3–5 分鐘</li><li>每組 4 張卡片，依序點選：<b>最像你 7 分</b>、<b>次像你 5 分</b>、<b>有點像你 3 分</b>，剩下的一張自動為<b>不像你 1 分</b></li><li>每組的 7、5、3、1 各只能用一次</li><li>請依平常工作中的真實狀態作答，沒有對錯</li></ul>
+ <ul><li>共 <span id="nq"></span> 個題組，約 5–8 分鐘</li><li>每組 4 張卡片，依序點選：<b>最像你 7 分</b>、<b>次像你 5 分</b>、<b>有點像你 3 分</b>，剩下的一張自動為<b>不像你 1 分</b></li><li>每組的 7、5、3、1 各只能用一次</li><li>請依平常工作中的真實狀態作答，沒有對錯</li></ul>
  <label>姓名 *</label><input id="name" autocomplete="name">
  <label>單位 / 部門 *</label><input id="unit">
  <label>面試單位 / 應徵職務</label><input id="iv">
@@ -63,7 +63,7 @@ tr.r{cursor:pointer}tr.r:hover{background:var(--in)}ul{padding-left:20px;margin:
  <div class="row"><button id="prev">← 上一題</button><button class="p" id="next" disabled>下一題 →</button></div>
 </div></section>
 
-<section id="s3" class="hidden"><div class="card" id="res"></div><div class="row"><button id="again">🏠 回到首頁</button></div></section>
+<section id="s3" class="hidden"><div class="card" id="res"></div><div class="row"><button class="p" id="dl">📥 下載結果圖片（JPG）</button><button id="again">🏠 回到首頁</button></div></section>
 
 <section id="s4" class="hidden"><div class="card" id="login"><h2 style="margin-top:0">🔐 主管登入</h2><label>Email</label><input id="em" type="email" autocomplete="username"><label>密碼</label><input id="pw" type="password" autocomplete="current-password"><div class="row"><button class="p" id="li">登入</button></div><p class="mu" id="lm"></p></div><div id="adminbox" class="hidden">
  <div class="card"><h2 style="margin-top:0">📋 測驗紀錄（僅主管可見）</h2>
@@ -88,7 +88,7 @@ const firebaseConfig={
  appId:"1:839353958654:web:7fae251ec41d34e63825af",
  measurementId:"G-5KYF9DJ9HC"};
 // ▲▲▲ 設定值到此為止 ▲▲▲
-const LO=11,HI=29,K=["D","I","S","C"],$=id=>document.getElementById(id);
+const LO=11,HI=30,K=["D","I","S","C"],$=id=>document.getElementById(id);
 const T={
 D:{e:"🐯",n:"老虎",t:"主導型／果斷行動",c:"#e5484d",kw:"果斷、積極、獨立、重視效率、目標導向、勇於挑戰",need:"明確目標、足夠自主權，以及能展現成果的工作空間",work:"喜歡設定目標、掌握進度，習慣先行動再調整；常是帶頭推動、願意承擔責任的人。適合目標明確、授權清楚、能看見成果的環境。",stress:"進度落後或決策受限時更重視速度，傾向快速接手、要求進度，可能減少討論與確認。",lead:["溝通：直接簡潔，以結論和行動為主","交辦：說明目標、期限、預期成果與可用權限","回饋：直接說明問題與改善方向，給予發揮空間","帶領：適度授權；規範、界線與品質標準仍須明確"],blind:"過於追求效率而忽略細節或他人感受；決策快而少聽不同意見；對反覆確認缺乏耐心；習慣主導而壓縮他人參與。",sign:"說話變快、語氣急促；頻繁問進度；過度介入他人工作；對流程限制不耐。",conf:"先讓雙方說明觀點，回到事實、目標與可行方案；釐清權責與決策範圍，避免變成權威之爭，並提供明確選項與決策時間。",say:"我們先確認共同目標，再看看目前有哪些方案，找出最有效的做法。"},
 I:{e:"🦚",n:"孔雀",t:"影響型／熱情互動",c:"#f5a524",kw:"熱情、外向、樂觀、善於表達、喜歡互動、感染力強",need:"被認同、被重視，工作中能交流分享想法並發揮影響力",work:"喜歡有互動、有變化的工作，透過討論與分享推動事情；擅長帶動氣氛、建立關係，是團隊的溝通橋梁。適合鼓勵創意與肯定表現的環境。",stress:"缺乏回饋、被忽略或長期做重複缺乏互動的事務時易失去熱情；可能大量溝通尋求支持，或想法太多難以專注執行。",lead:["溝通：親切有互動，適度肯定並留交流空間","交辦：說明工作目的與意義，讓對方感到參與價值","回饋：先肯定具體表現，再提改善處與明確做法","帶領：鼓勵表達，同時協助確認期限、分工與執行事項"],blind:"對新事物感興趣但不易持續專注；顧及氣氛不易直接表達異議；想法多而忽略細節；較依賴外界肯定。",sign:"話變多、反覆尋求認同；注意力分散；對缺乏互動的工作倦怠；熱情逐漸轉為沉默。",conf:"先讓雙方表達感受與想法，情緒緩和後再回到具體事件與工作需求，區分個人感受與實際問題，找出共同可接受的做法。",say:"我理解你有自己的想法，我們一起整理看看，怎麼做能兼顧彼此需求與工作目標。"},
@@ -96,39 +96,42 @@ S:{e:"🐨",n:"無尾熊",t:"穩定型／支持合作",c:"#30a46c",kw:"溫和、
 C:{e:"🦉",n:"貓頭鷹",t:"謹慎型／精確分析",c:"#3e63dd",kw:"理性、細心、謹慎、重視邏輯、追求正確、注重品質",need:"完整資訊、明確標準、合理流程，以及足夠時間確認工作內容與品質",work:"重視正確、細節與品質，先理解條件再執行；擅長檢查、分析、整理資訊並降低錯誤風險。適合流程清楚、標準一致、資訊充分的環境。",stress:"資訊不足、標準不明或被要求短時間完成未確認事項時，會更謹慎、反覆檢查，決策時間拉長，並對缺乏依據的要求提出較多疑問。",lead:["溝通：清楚有條理，重視事實、數據與依據","交辦：提供完整背景、作業標準、流程與期限","回饋：以具體事實、資料說明調整原因","帶領：給足資訊與標準，同時協助設定決策期限，避免過度反覆確認"],blind:"花較多時間確認細節；資訊不足難以快速決定；不習慣彈性或臨時變動；重邏輯而可能忽略對方感受。",sign:"反覆確認資料與流程；對標準不一致明顯不安；提出較多問題、要求補充依據；因過度檢查延遲進度。",conf:"先釐清雙方認知與判斷依據，再針對事實討論，不以感受或職位定對錯；建立共同標準，說明哪些須維持標準、哪些可彈性處理。",say:"我們先確認目前的事實與標準，再一起找出兼顧品質及執行效率的做法。"},
 X:{e:"🦎",n:"變色龍",t:"多元適應型／彈性調整",c:"#12a594",kw:"彈性、適應力、多元、善於調整、情境應變",need:"能依不同工作情境與任務需求，彈性運用能力與行為方式",work:"沒有單一固定偏好，能依任務調整工作方式，可同時具備果斷、熱情、穩定、謹慎等特質，能配合不同類型的合作對象。適合有彈性、目標與分工清楚的工作。",stress:"面對不同壓力反應不一，有時積極處理、有時求助、有時先觀察；應留意長期壓力下常出現的反應與特別耗費心力的情境。",lead:["溝通：依對象與情境調整，兼具直接、互動與理性","交辦：說明目標、期限與必要標準，保留執行彈性","回饋：依實際表現具體回饋，協助確認適合的工作方式","帶領：別因其能適應就認為任何安排都輕鬆，應了解真正想法"],blind:"太能配合而不易辨識自己的偏好；長期配合不同對象而疲累；他人不易掌握其立場；缺乏明確目標時不易確定方向。",sign:"工作方式或情緒隨情境變化；有時積極承擔、有時退讓；為配合團隊承接過多工作；看似適應卻疲憊、缺乏方向。",conf:"鼓勵雙方說明立場與需求，確認對目標理解一致；建立清楚分工與共同標準，避免因習慣配合而忽略其想法。",say:"我們可以依情況調整做法，也想了解你自己比較習慣哪一種方式，讓安排更符合彼此需求。"}};
 const Q=[
-[["堅定","固執"],["有說服力","善表達"],["溫和","文雅"],["為人謙虛","善於容忍"]],
-[["喜歡冒險","膽子很大"],["團隊中活力的來源"],["自我節制","個性穩健"],["嚴格仔細","詳細考究"]],
-[["有決心的","有決斷力"],["使人心服","善於說服"],["個性善良","追求和諧"],["處事謹慎","小心翼翼"]],
-[["有進取心","有成就心"],["俏皮變化","性情開朗"],["待人親切","做事誠懇"],["個性順從","善於思考"]],
-[["有魅力的","有威嚴的"],["個性樂觀","有趣好玩"],["寬大為懷","仁慈友善"],["追求正確","準備充分"]]];
+["果斷","熱情","耐心","謹慎"],["強勢","活潑","體貼","嚴謹"],["愛競爭","樂觀","穩定","精確"],["直接","健談","包容","有條理"],["敢冒險","善交際","忠誠","客觀"],
+["愛主導","有感染力","隨和","重邏輯"],["要求高","愛表達","溫和","守規矩"],["獨立","外向","可靠","細心"],["果敢","幽默","好相處","重事實"],["目標導向","親和","謙讓","追求品質"],
+["勇於挑戰","鼓舞人心","不急躁","按步驟做事"],["決策快","有說服力","樂於支持他人","分析型"],["自信","受歡迎","平靜","謹守標準"],["掌控局面","人緣好","願意配合","追求完美"],["積極進取","開朗","知足","審慎"],
+["不服輸","熱絡","有耐性","保守"],["效率優先","愛社交","念舊","重細節"],["敢拍板","表情豐富","低調","講求準確"],["愛開創","善激勵","擅協調","愛查證"],["有威嚴","風趣","體諒人","周密"]].map(g=>g.map(w=>[w]));
 // 每組 4 張卡片依序對應 D、I、S、C（對應只在程式內，不顯示給作答者）；得分 7/5/3/1
 const PTS=[7,5,3,1];
-let ans=[],cur=0,info={},ord=[],db=null,user=null,all=[],isAdmin=false;
+const SC=Q.length/5,MAXS=7*Q.length; // SC：題組數相對 5 組基準的倍率，用來換算變色龍門檻
+let lastRec=null,ans=[],cur=0,info={},ord=[],db=null,user=null,all=[],isAdmin=false;
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const shuf=()=>Q.map(()=>[0,1,2,3].sort(()=>Math.random()-.5));ord=shuf();$("nq").textContent=Q.length;
+// 洗牌（Fisher-Yates）：題目順序與每題的卡片順序都隨機，且卡片順序不會剛好是 D-I-S-C
+const fy=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let qord=[];
+const shuf=()=>{qord=fy(Q.map((_,i)=>i));return Q.map(()=>{let o;do{o=fy([0,1,2,3])}while(o.join()==="0,1,2,3");return o})};ord=shuf();$("nq").textContent=Q.length;
 const show=id=>{["s1","s2","s3","s4"].forEach(s=>$(s).classList.toggle("hidden",s!==id));scrollTo(0,0)};
 const chk=()=>{$("start").disabled=!($("name").value.trim()&&$("unit").value.trim())};["name","unit"].forEach(i=>$(i).oninput=chk);
-$("start").onclick=()=>{info={name:$("name").value.trim(),unit:$("unit").value.trim(),iv:$("iv").value.trim(),kind:$("kind").value};ans=Q.map(()=>[]);cur=0;show("s2");draw()};
+$("start").onclick=()=>{info={name:$("name").value.trim(),unit:$("unit").value.trim(),iv:$("iv").value.trim(),kind:$("kind").value};ord=shuf();ans=Q.map(()=>[]);cur=0;show("s2");draw()};
 function draw(){const a=ans[cur],L=["最像你","次像你","有點像你"];
  $("pt").textContent=`第 ${cur+1} / ${Q.length} 組`;$("pb").style.width=(cur/Q.length*100)+"%";
  $("hint").textContent=a.length<3?`👆 請點選「${L[a.length]}」的一張卡片（${PTS[a.length]} 分）`:"✔ 已完成，最後一張自動為 1 分；點選已選卡片可取消重選";
  $("opts").innerHTML="";
  ord[cur].forEach(i=>{const p=a.indexOf(i),pt=p>=0?PTS[p]:(a.length===3?1:null),b=document.createElement("button");
-  b.className="o"+(p===0?" m":p>0?" s":"");b.innerHTML=`<b>${pt==null?"　":pt+" 分"}</b><span></span>`;b.lastChild.textContent=Q[cur][i].join("　");
+  b.className="o"+(p===0?" m":p>0?" s":"");b.innerHTML=`<b>${pt==null?"　":pt+" 分"}</b><span></span>`;b.lastChild.textContent=Q[qord[cur]][i].join("　");
   b.onclick=()=>{if(p>=0)a.splice(p,1);else if(a.length<3)a.push(i);draw()};$("opts").appendChild(b)});
  $("prev").disabled=!cur;$("next").disabled=a.length<3;$("next").textContent=cur===Q.length-1?"🎉 完成送出":"下一組 →"}
 $("prev").onclick=()=>{cur--;draw()};
 $("next").onclick=()=>{cur<Q.length-1?(cur++,draw()):finish()};
 function judge(sc){const v=K.map(k=>sc[k]),mx=Math.max(...v),main=K[v.indexOf(mx)]; // 同分依 D>I>S>C
- const cham=v.every(x=>x>=LO&&x<=HI);return{main,type:cham?"X":main,cham}}
+ const cham=v.every(x=>x>=LO*SC&&x<HI*SC);return{main,type:cham?"X":main,cham}}
 async function finish(){
  const sc={D:0,I:0,S:0,C:0};
  ans.forEach(a=>{const o=[...a,[0,1,2,3].find(i=>!a.includes(i))];o.forEach((c,r)=>{sc[K[c]]+=PTS[r]})});
  if(K.reduce((x,k)=>x+sc[k],0)!==80*Q.length/5){alert("計分異常，請重新作答");return}
- const j=judge(sc),rec={...info,ts:Date.now(),sc,main:j.main,type:j.type};let saved=false;
+ const j=judge(sc),rec={...info,ts:Date.now(),sc,main:j.main,type:j.type};lastRec=rec;let saved=false;
  saved=await saveRec(rec);
  $("res").innerHTML=view(rec,false)+`<p class="mu">${saved==="ok"?"✔ 您的結果已送出給主管。":saved==="local"?"⚠ 目前為本機測試模式，資料只存在此瀏覽器，主管看不到。":"⚠ 送出失敗，結果未被記錄，請通知主管。"}</p>`;show("s3")}
-const bars=sc=>K.map(k=>`<div>${T[k].e} <b>${k}</b> ${T[k].n} <span class="mu">${sc[k]} 分</span><div class="bar"><i style="width:${Math.min(100,sc[k]/35*100)}%;background:${T[k].c}"></i></div></div>`).join("");
+const bars=sc=>K.map(k=>`<div>${T[k].e} <b>${k}</b> ${T[k].n} <span class="mu">${sc[k]} 分</span><div class="bar"><i style="width:${Math.min(100,sc[k]/MAXS*100)}%;background:${T[k].c}"></i></div></div>`).join("");
 const li=a=>`<ul>${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
 function view(r,adm){const t=T[r.type],m=T[r.main];
  let h=`<div class="big">${t.e}</div><h2 style="text-align:center;margin:4px 0">${esc(r.name)} 是 ${t.n}${r.type==="X"?"（偏向 "+r.main+" "+m.n+"）":""}</h2>
@@ -140,6 +143,40 @@ function view(r,adm){const t=T[r.type],m=T[r.main];
  if(adm){h+=`<h3>😤 高壓力下的反應</h3><p>${t.stress}</p><h3>🗣️ 適合的溝通與帶領方式</h3>${li(t.lead)}<h3>🚨 壓力訊號</h3><p>${t.sign}</p><h3>🤝 衝突協調方式</h3><p>${t.conf}</p><p class="mu">示例：「${t.say}」</p>`;
   if(r.type==="X")h+=`<h3>🔎 較偏向 ${r.main} ${m.n}：帶領重點</h3>${li(m.lead)}`}
  return h+`<p class="mu">提醒：結果呈現當下作答的行為偏好，不代表固定人格，也不代表專業能力或工作表現，請搭配面談與實際表現綜合參考。</p>`}
+// ===== 下載結果圖片（JPG）：用 canvas 直接繪製，不需外部套件 =====
+function jpgDownload(r){
+ const W=1080,P=80,t=T[r.type],m=T[r.main],F='"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif';
+ const rr=(c,x,y,w,h,d)=>{c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,d);else c.rect(x,y,w,h)};
+ const paint=(c,draw,H)=>{
+  const f=(n,b)=>{c.font=`${b?"bold ":""}${n}px ${F}`},tx=(s,x,y)=>{if(draw)c.fillText(s,x,y)};
+  const wrap=(s,y,n,lh,col)=>{f(n);c.fillStyle=col;let line="";for(const ch of s){if(c.measureText(line+ch).width>W-2*P&&line){tx(line,P,y);y+=lh;line=ch}else line+=ch}tx(line,P,y);return y+lh};
+  c.textBaseline="top";
+  if(draw){c.fillStyle="#fff4d6";c.fillRect(0,0,W,H);c.fillStyle="#ffffff";rr(c,30,30,W-60,H-60,40);c.fill()}
+  let y=P;c.textAlign="center";
+  f(28);c.fillStyle="#7a7390";tx("DISC 職場性格測驗結果",W/2,y);y+=60;
+  f(110);c.fillStyle="#000000";tx(t.e,W/2,y);y+=150;
+  f(46,1);c.fillStyle="#2b2540";tx(`${r.name} 是 ${t.n}`,W/2,y);y+=66;
+  if(r.type==="X"){f(30,1);c.fillStyle=m.c;tx(`（較偏向 ${r.main} ${m.n}）`,W/2,y);y+=50}
+  f(28,1);c.fillStyle=t.c;tx(t.t,W/2,y);y+=48;
+  f(24);c.fillStyle="#7a7390";tx([r.unit,r.iv].filter(Boolean).join("｜")+"　"+new Date(r.ts).toLocaleDateString("zh-TW"),W/2,y);y+=70;
+  for(const k of K){c.textAlign="left";f(28,1);c.fillStyle="#2b2540";tx(`${T[k].e} ${k} ${T[k].n}`,P,y);
+   c.textAlign="right";f(28);c.fillStyle="#7a7390";tx(`${r.sc[k]} 分`,W-P,y);c.textAlign="left";y+=44;
+   if(draw){c.fillStyle="#f0e3d0";rr(c,P,y,W-2*P,20,10);c.fill();c.fillStyle=T[k].c;rr(c,P,y,Math.max(20,(W-2*P)*Math.min(1,r.sc[k]/MAXS)),20,10);c.fill()}
+   y+=52}
+  y+=10;c.textAlign="left";
+  const sec=(h,b)=>{f(32,1);c.fillStyle="#ff7a45";tx(h,P,y);y+=50;y=wrap(b,y,26,42,"#2b2540")+18};
+  sec("✨ 特質關鍵字",t.kw);sec("🎯 核心需求",t.need);sec("💼 職場工作樣貌",t.work);
+  if(r.type==="X")sec(`📌 較偏向的特質：${r.main} ${m.n}`,m.kw);
+  sec("⚠️ 可能的工作盲點",t.blind);
+  y=wrap("提醒：結果呈現當下作答的行為偏好，不代表固定人格，也不代表專業能力或工作表現，請搭配面談與實際表現綜合參考。",y+10,22,36,"#7a7390");
+  return y+P};
+ try{const cv=document.createElement("canvas");cv.width=W;const c=cv.getContext("2d");
+  const H=Math.ceil(paint(c,false,0));cv.height=H;paint(c,true,H);
+  cv.toBlob(b=>{if(!b){alert("無法產生圖片，請改用截圖");return}
+   const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`DISC結果_${String(r.name).replace(/[\\/:*?"<>|]/g,"")}.jpg`;
+   document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)},"image/jpeg",0.92)}
+ catch(e){console.error(e);alert("無法產生圖片，請改用截圖")}}
+$("dl").onclick=()=>{if(lastRec)jpgDownload(lastRec)};
 $("again").onclick=()=>{["name","unit","iv"].forEach(i=>$(i).value="");chk();ord=shuf();show("s1")};
 
 // ===== 後台（Firebase；設定值未填時為本機測試模式）=====
