@@ -78,25 +78,18 @@ tr.r{cursor:pointer}tr.r:hover{background:var(--in)}ul{padding-left:20px;margin:
 </div>
 
 <script type="module">
-// ▼▼▼ Firebase 設定值 ▼▼▼
-const firebaseConfig = {apiKey: "AIzaSyBP4vF2Bv_rJ0uSsuPW7evVJuxxfBI3StQ", authDomain: "disc-test-71aef.firebaseapp.com", projectId: "disc-test-71aef", storageBucket: "disc-test-71aef.firebasestorage.app", messagingSenderId: "839353958654", appId: "1:839353958654:web:7fae251ec41d34e63825af", measurementId: "G-5KYF9DJ9HC"};
+// ▼▼▼ 把 Firebase 的設定值貼在這裡，取代所有 YOUR_ 開頭的文字（保留引號與逗號）▼▼▼
+const firebaseConfig={
+ apiKey:"AIzaSyBP4vF2Bv_rJ0uSsuPW7evVJuxxfBI3StQ",
+ authDomain:"disc-test-71aef.firebaseapp.com",
+ projectId:"disc-test-71aef",
+ storageBucket:"disc-test-71aef.firebasestorage.app",
+ messagingSenderId:"839353958654",
+ appId:"1:839353958654:web:7fae251ec41d34e63825af",
+ measurementId:"G-5KYF9DJ9HC"};
 // ▲▲▲ 設定值到此為止 ▲▲▲
 const LO=11,HI=29,K=["D","I","S","C"],$=id=>document.getElementById(id);
 const T={
-D:{e:"🐯",n:"老虎",t:"主導型／果斷行動",c:"#e5484d",
- messagingSenderId:"YOUR_SENDER_ID",
- appId:"YOUR_APP_ID"};
-// ▲▲▲ 設定值到此為止 ▲▲▲
-const LO=11,HI=29,K=["D","I","S","C"],$=id=>document.getElementById(id);
-const firebaseConfig = {
-  apiKey: "AIzaSyBP4vF2Bv_rJ0uSsuPW7evVJuxxfBI3StQ",
-  authDomain: "disc-test-71aef.firebaseapp.com",
-  projectId: "disc-test-71aef",
-  storageBucket: "disc-test-71aef.firebasestorage.app",
-  messagingSenderId: "839353958654",
-  appId: "1:839353958654:web:7fae251ec41d34e63825af",
-  measurementId: "G-5KYF9DJ9HC"
-};
 D:{e:"🐯",n:"老虎",t:"主導型／果斷行動",c:"#e5484d",kw:"果斷、積極、獨立、重視效率、目標導向、勇於挑戰",need:"明確目標、足夠自主權，以及能展現成果的工作空間",work:"喜歡設定目標、掌握進度，習慣先行動再調整；常是帶頭推動、願意承擔責任的人。適合目標明確、授權清楚、能看見成果的環境。",stress:"進度落後或決策受限時更重視速度，傾向快速接手、要求進度，可能減少討論與確認。",lead:["溝通：直接簡潔，以結論和行動為主","交辦：說明目標、期限、預期成果與可用權限","回饋：直接說明問題與改善方向，給予發揮空間","帶領：適度授權；規範、界線與品質標準仍須明確"],blind:"過於追求效率而忽略細節或他人感受；決策快而少聽不同意見；對反覆確認缺乏耐心；習慣主導而壓縮他人參與。",sign:"說話變快、語氣急促；頻繁問進度；過度介入他人工作；對流程限制不耐。",conf:"先讓雙方說明觀點，回到事實、目標與可行方案；釐清權責與決策範圍，避免變成權威之爭，並提供明確選項與決策時間。",say:"我們先確認共同目標，再看看目前有哪些方案，找出最有效的做法。"},
 I:{e:"🦚",n:"孔雀",t:"影響型／熱情互動",c:"#f5a524",kw:"熱情、外向、樂觀、善於表達、喜歡互動、感染力強",need:"被認同、被重視，工作中能交流分享想法並發揮影響力",work:"喜歡有互動、有變化的工作，透過討論與分享推動事情；擅長帶動氣氛、建立關係，是團隊的溝通橋梁。適合鼓勵創意與肯定表現的環境。",stress:"缺乏回饋、被忽略或長期做重複缺乏互動的事務時易失去熱情；可能大量溝通尋求支持，或想法太多難以專注執行。",lead:["溝通：親切有互動，適度肯定並留交流空間","交辦：說明工作目的與意義，讓對方感到參與價值","回饋：先肯定具體表現，再提改善處與明確做法","帶領：鼓勵表達，同時協助確認期限、分工與執行事項"],blind:"對新事物感興趣但不易持續專注；顧及氣氛不易直接表達異議；想法多而忽略細節；較依賴外界肯定。",sign:"話變多、反覆尋求認同；注意力分散；對缺乏互動的工作倦怠；熱情逐漸轉為沉默。",conf:"先讓雙方表達感受與想法，情緒緩和後再回到具體事件與工作需求，區分個人感受與實際問題，找出共同可接受的做法。",say:"我理解你有自己的想法，我們一起整理看看，怎麼做能兼顧彼此需求與工作目標。"},
 S:{e:"🐨",n:"無尾熊",t:"穩定型／支持合作",c:"#30a46c",kw:"溫和、耐心、穩定、可靠、善於傾聽、重視團隊和諧",need:"穩定的環境、清楚的安排、互相信任與彼此支持的團隊關係",work:"做事穩定有耐心，重視品質與合作，習慣依既有流程，新任務需要時間適應；擅長支持他人、維持團隊穩定。適合分工明確、可循序調整的環境。",stress:"工作突然變動、任務同時湧現或人際衝突時易不安；可能先配合他人、不說困難，把壓力留給自己。",lead:["溝通：溫和耐心，給予充分理解與表達時間","交辦：提前說明內容、順序與可能變動，避免臨時大改","回饋：以具體事實為主，避免公開指責或強烈施壓","帶領：主動詢問負荷與困難，不因對方總說好就以為沒問題"],blind:"重視和諧而不易拒絕；面對改變需較長適應；配合團隊而忽略自身負荷；遇不同意見易沉默退讓。",sign:"原本穩定配合卻變沉默、少主動表達；對變動猶豫、反覆確認；表面答應但進度變慢；迴避人際摩擦。",conf:"建立安全、不指責的溝通環境，不急著要求表態；以具體問題釐清安排是否合理；鼓勵表達不同意見，讓同仁知道提出問題不等於破壞和諧。",say:"你可以放心說明自己的想法，我們一起看看目前的安排有沒有需要調整的地方。"},
