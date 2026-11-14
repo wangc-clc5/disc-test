@@ -1,9 +1,9 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // 主管 Email（請改成你建立的主管帳號，全部用小寫，可用逗號加多個）
+    // wangc@clc5.url.tw
     function isAdmin() {
-      return request.auth != null && request.auth.token.email in ['請改成主管的email@example.com'];
+      return request.auth != null && request.auth.token.email in ['wangc@clc5.url.tw'];
     }
     function validRec(d) {
       return d.keys().hasOnly(['name','unit','iv','kind','ts','sc','main','type'])
